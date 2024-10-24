@@ -1,5 +1,5 @@
 import os
-from typing import Callable, NoReturn
+from typing import Callable, Optional, NoReturn
 
 import discord
 from discord.ext import commands 
@@ -33,7 +33,7 @@ class ExtensionCog(commands.Cog):
             assert False, "無法預期的錯誤"
 
     @staticmethod
-    def get_bot_icon() -> str | None:
+    def get_bot_icon() -> Optional[str]:
         return os.getenv(key="BOT_ICON_URL")
 
     @staticmethod    
@@ -45,10 +45,10 @@ class ExtensionCog(commands.Cog):
 
 class BasicView(discord.ui.View):
 
-    ctx: discord.Interaction | None
+    ctx: Optional[discord.Interaction]
     disable_on_timeout: bool
 
-    def __init__(self, timeout: float | None = 180) -> None:
+    def __init__(self, timeout: Optional[float] = 180) -> None:
         super().__init__(timeout=timeout)
         self.ctx = None
         self.disable_on_timeout = False
